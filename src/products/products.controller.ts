@@ -34,13 +34,19 @@ export class ProductsController {
     @Body() updateProductDto: UpdateProductDto */
     @Payload() updateProductDto: UpdateProductDto
     ) {
+     /*  const {id:__, ...data}= updateProductDto */
   
-   return this.productsService.update(id, updateProductDto);
+   return this.productsService.update(updateProductDto.id, updateProductDto);
   }
 
 /*   @Delete(':id') */
 @MessagePattern({cmd:'delete_product'})
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Payload('id', ParseIntPipe) id: number) {
     return this.productsService.remove(id);
+  }
+
+  @MessagePattern({cmd:'validate_product'})
+  validate(@Payload() ids: number[]) {
+    return this.productsService.validateProducts(ids);
   }
 }
