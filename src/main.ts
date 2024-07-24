@@ -15,7 +15,7 @@ async function bootstrap() {
 {
   transport: Transport.NATS,
   options:{
-   severs: envs.natsServers
+   servers: envs.natsServers
   }
 }    );
 
